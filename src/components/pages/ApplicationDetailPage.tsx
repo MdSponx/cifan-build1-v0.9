@@ -224,11 +224,26 @@ const ApplicationDetailPage: React.FC<ApplicationDetailPageProps> = ({ applicati
             {currentContent.backToApplications}
           </AnimatedButton>
           
-          <h1 className={`text-2xl sm:text-3xl ${getClass('header')} text-white`}>
-            {currentContent.applicationDetails}
-          </h1>
-          
-          <div></div> {/* Spacer for flex layout */}
+          <div className="flex items-center gap-4">
+            <h1 className={`text-2xl sm:text-3xl ${getClass('header')} text-white`}>
+              {currentContent.applicationDetails}
+            </h1>
+            
+            {/* Edit Button - Only show for draft applications */}
+            {application.status === 'draft' && (
+              <AnimatedButton
+                variant="secondary"
+                size="medium"
+                icon="✏️"
+                onClick={() => {
+                  // TODO: Implement edit mode toggle
+                  console.log('Edit application clicked');
+                }}
+              >
+                {currentLanguage === 'th' ? 'แก้ไข' : 'Edit'}
+              </AnimatedButton>
+            )}
+          </div>
         </div>
 
         {/* Application Layout */}

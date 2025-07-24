@@ -227,6 +227,115 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
         canEdit={canEdit}
       />
 
+      {/* Crew Section */}
+      <div className="glass-container rounded-2xl p-6 sm:p-8">
+        <h3 className={`text-xl ${getClass('header')} text-white mb-6`}>
+          👥 {currentLanguage === 'th' ? 'ทีมงาน' : 'Crew'}
+        </h3>
+        
+        {/* Submitter as Head */}
+        <div className="mb-6">
+          <h4 className={`text-lg ${getClass('subtitle')} text-[#FCB283] mb-4`}>
+            {currentLanguage === 'th' ? 'ผู้ส่งผลงาน (หัวหน้าทีม)' : 'Submitter (Team Lead)'}
+          </h4>
+          <div className="glass-card p-4 rounded-xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <span className={`text-sm ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'ชื่อ:' : 'Name:'}
+                </span>
+                <p className={`${getClass('body')} text-white`}>
+                  {currentLanguage === 'th' && (application as any).directorNameTh 
+                    ? (application as any).directorNameTh 
+                    : (application as any).directorName || (application as any).submitterName}
+                </p>
+              </div>
+              <div>
+                <span className={`text-sm ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'บทบาท:' : 'Role:'}
+                </span>
+                <p className={`${getClass('body')} text-white`}>
+                  {(application as any).directorRole || (application as any).submitterRole}
+                </p>
+              </div>
+              <div>
+                <span className={`text-sm ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'อายุ:' : 'Age:'}
+                </span>
+                <p className={`${getClass('body')} text-white`}>
+                  {(application as any).directorAge || (application as any).submitterAge} {currentLanguage === 'th' ? 'ปี' : 'years'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Crew Members Table */}
+        {(application as any).crewMembers && (application as any).crewMembers.length > 0 ? (
+          <div>
+            <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
+              {currentLanguage === 'th' ? 'สมาชิกทีมงาน' : 'Crew Members'}
+            </h4>
+            <div className="overflow-x-auto">
+              <table className="w-full glass-card rounded-xl border border-white/10">
+                <thead>
+                  <tr className="bg-gradient-to-r from-[#AA4626] to-[#FCB283]">
+                    <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
+                      {currentLanguage === 'th' ? 'ชื่อ' : 'Name'}
+                    </th>
+                    <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
+                      {currentLanguage === 'th' ? 'บทบาท' : 'Role'}
+                    </th>
+                    <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
+                      {currentLanguage === 'th' ? 'อายุ' : 'Age'}
+                    </th>
+                    <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
+                      {currentLanguage === 'th' ? 'ติดต่อ' : 'Contact'}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(application as any).crewMembers.map((member: any, index: number) => (
+                    <tr key={index} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
+                        <div>
+                          <div>{member.fullName}</div>
+                          {member.fullNameTh && (
+                            <div className="text-xs text-white/60">{member.fullNameTh}</div>
+                          )}
+                        </div>
+                      </td>
+                      <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
+                        {member.role === 'Other' ? member.customRole : member.role}
+                      </td>
+                      <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
+                        {member.age} {currentLanguage === 'th' ? 'ปี' : 'years'}
+                      </td>
+                      <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
+                        <div className="space-y-1">
+                          {member.phone && (
+                            <div className="text-xs">📱 {member.phone}</div>
+                          )}
+                          {member.email && (
+                            <div className="text-xs">📧 {member.email}</div>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <div className="glass-card p-6 rounded-xl text-center">
+            <p className={`${getClass('body')} text-white/60`}>
+              {currentLanguage === 'th' ? 'ไม่มีสมาชิกทีมงานเพิ่มเติม' : 'No additional crew members'}
+            </p>
+          </div>
+        )}
+      </div>
+
       {/* Edit Mode: Form-style Layout */}
       {isEditMode && (
         <DetailsSection 
