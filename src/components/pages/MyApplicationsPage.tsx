@@ -94,20 +94,20 @@ const MyApplicationsPage = () => {
             duration: data.duration || 0,
             synopsis: data.synopsis || '',
             files: {
-              filmFile: data.files?.filmFile || {
-                url: data.files.filmFile.downloadURL || '',
-                name: data.files.filmFile.fileName || '',
-                size: data.files.filmFile.fileSize || 0
+              filmFile: {
+                url: data.files?.filmFile?.downloadURL || '',
+                name: data.files?.filmFile?.fileName || '',
+                size: data.files?.filmFile?.fileSize || 0
               },
-              posterFile: data.files?.posterFile || {
-                url: data.files.posterFile.downloadURL || '',
-                name: data.files.posterFile.fileName || '',
-                size: data.files.posterFile.fileSize || 0
+              posterFile: {
+                url: data.files?.posterFile?.downloadURL || '',
+                name: data.files?.posterFile?.fileName || '',
+                size: data.files?.posterFile?.fileSize || 0
               },
               proofFile: data.files?.proofFile ? {
-                url: data.files.proofFile.downloadURL || '',
-                name: data.files.proofFile.fileName || '',
-                size: data.files.proofFile.fileSize || 0
+                url: data.files?.proofFile?.downloadURL || '',
+                name: data.files?.proofFile?.fileName || '',
+                size: data.files?.proofFile?.fileSize || 0
               } : undefined
             },
             submittedAt: data.submittedAt,
@@ -115,14 +115,17 @@ const MyApplicationsPage = () => {
             lastModified: data.lastModified
           };
           
-          // More lenient validation - only require basic fields
-          if (application.filmTitle && application.competitionCategory) {
+          // Validate that we have the essential data and at least a poster URL
+          if (application.filmTitle && application.competitionCategory && application.files.posterFile.url) {
             console.log('Adding application:', application.id, application.filmTitle);
+            console.log('Poster URL:', application.files.posterFile.url);
             userApplications.push(application);
           } else {
             console.warn('Skipping document with missing basic fields:', doc.id, {
               hasTitle: !!application.filmTitle,
               hasCategory: !!application.competitionCategory,
+              hasPosterUrl: !!application.files.posterFile.url,
+              posterData: data.files?.posterFile,
               data: data
             });
           }
@@ -271,7 +274,7 @@ const MyApplicationsPage = () => {
               >
                 {/* Poster Image */}
                 <div className="relative aspect-[4/5] bg-white/5">
-                  {application.files.posterFile.url ? (
+                  {application.files.posterFile?.url ? (
                     <img
                       src={application.files.posterFile.url}
                       alt={`${application.filmTitle} Poster`}
