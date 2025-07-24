@@ -130,26 +130,8 @@ const VideoSection: React.FC<VideoSectionProps> = ({
 
   return (
     <div className="glass-container rounded-2xl p-6 sm:p-8">
-      <div className="space-y-6">
-        
-        {/* Video Player Header */}
-        <div className="flex justify-between items-center">
-          <h3 className={`text-xl ${getClass('header')} text-white`}>
-            {currentLanguage === 'th' ? 'ตัวอย่างภาพยนตร์' : 'Film Preview'}
-          </h3>
-          
-          {/* Video Info */}
-          <div className="text-right">
-            <p className={`text-sm ${getClass('body')} text-white/80`}>
-              {application.files.filmFile.name}
-            </p>
-            <p className="text-xs text-white/60">
-              {formatFileSize(application.files.filmFile.size)} • {application.duration} {currentLanguage === 'th' ? 'นาที' : 'min'}
-            </p>
-          </div>
-        </div>
-
-        {/* Custom Video Player */}
+      {/* Video Player Only */}
+      <div>
         <div 
           className="relative bg-black rounded-xl overflow-hidden group"
           onMouseEnter={() => setIsHovered(true)}
@@ -258,36 +240,6 @@ const VideoSection: React.FC<VideoSectionProps> = ({
               </button>
             </div>
           )}
-        </div>
-
-        {/* Video Details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="glass-card p-4 rounded-xl">
-            <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-2`}>
-              {currentLanguage === 'th' ? 'ขนาดไฟล์' : 'File Size'}
-            </h4>
-            <p className={`text-lg ${getClass('body')} text-[#FCB283]`}>
-              {formatFileSize(application.files.filmFile.size)}
-            </p>
-          </div>
-
-          <div className="glass-card p-4 rounded-xl">
-            <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-2`}>
-              {currentLanguage === 'th' ? 'ความยาว' : 'Duration'}
-            </h4>
-            <p className={`text-lg ${getClass('body')} text-[#FCB283]`}>
-              {application.duration} {currentLanguage === 'th' ? 'นาที' : 'min'}
-            </p>
-          </div>
-
-          <div className="glass-card p-4 rounded-xl">
-            <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-2`}>
-              {currentLanguage === 'th' ? 'รูปแบบ' : 'Format'}
-            </h4>
-            <p className={`text-lg ${getClass('body')} text-[#FCB283] uppercase`}>
-              {(application.files.filmFile.name ?? '').split('.').pop()}
-            </p>
-          </div>
         </div>
       </div>
     </div>
