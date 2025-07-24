@@ -285,7 +285,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
               {currentLanguage === 'th' ? 'รูปแบบ' : 'Format'}
             </h4>
             <p className={`text-lg ${getClass('body')} text-[#FCB283] uppercase`}>
-              {application.files.filmFile.name.split('.').pop()}
+              {(application.files.filmFile.name ?? '').split('.').pop()}
             </p>
           </div>
         </div>
