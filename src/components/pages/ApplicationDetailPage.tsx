@@ -94,22 +94,52 @@ const ApplicationDetailPage: React.FC<ApplicationDetailPageProps> = ({ applicati
             format: data.format,
             duration: data.duration,
             synopsis: data.synopsis,
+            chiangmaiConnection: data.chiangmaiConnection,
+            // Submitter/Director data
+            submitterName: data.submitterName || data.directorName,
+            submitterNameTh: data.submitterNameTh || data.directorNameTh,
+            submitterAge: data.submitterAge || data.directorAge,
+            submitterPhone: data.submitterPhone || data.directorPhone,
+            submitterEmail: data.submitterEmail || data.directorEmail,
+            submitterRole: data.submitterRole || data.directorRole,
+            submitterCustomRole: data.submitterCustomRole || data.directorCustomRole,
+            // Education data
+            schoolName: data.schoolName,
+            studentId: data.studentId,
+            universityName: data.universityName,
+            faculty: data.faculty,
+            universityId: data.universityId,
+            // Crew members
+            crewMembers: data.crewMembers || [],
             files: {
-              filmFile: data.files?.filmFile || {
-                url: '',
-                name: '',
-                size: 0
+              filmFile: {
+                url: data.files?.filmFile?.downloadURL || '',
+                name: data.files?.filmFile?.fileName || '',
+                size: data.files?.filmFile?.fileSize || 0
               },
-              posterFile: data.files?.posterFile || {
-                url: '',
-                name: '',
-                size: 0
-              }
+              posterFile: {
+                url: data.files?.posterFile?.downloadURL || '',
+                name: data.files?.posterFile?.fileName || '',
+                size: data.files?.posterFile?.fileSize || 0
+              },
+              proofFile: data.files?.proofFile ? {
+                url: data.files?.proofFile?.downloadURL || '',
+                name: data.files?.proofFile?.fileName || '',
+                size: data.files?.proofFile?.fileSize || 0
+              } : undefined
             },
             submittedAt: data.submittedAt,
             createdAt: data.createdAt,
             lastModified: data.lastModified
           } as ApplicationData);
+          
+          console.log('Application data loaded:', {
+            id: docSnap.id,
+            filmTitle: data.filmTitle,
+            posterUrl: data.files?.posterFile?.downloadURL,
+            filmUrl: data.files?.filmFile?.downloadURL,
+            crewCount: data.crewMembers?.length || 0
+          });
         } else {
           setError(currentLanguage === 'th' ? 'ไม่พบใบสมัครที่ระบุ' : 'Application not found');
         }

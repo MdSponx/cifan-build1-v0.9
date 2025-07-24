@@ -19,6 +19,23 @@ interface ApplicationData {
   format: string;
   duration: number;
   synopsis: string;
+  chiangmaiConnection?: string;
+  // Submitter/Director data
+  submitterName?: string;
+  submitterNameTh?: string;
+  submitterAge?: number;
+  submitterPhone?: string;
+  submitterEmail?: string;
+  submitterRole?: string;
+  submitterCustomRole?: string;
+  // Education data
+  schoolName?: string;
+  studentId?: string;
+  universityName?: string;
+  faculty?: string;
+  universityId?: string;
+  // Crew members
+  crewMembers?: any[];
   files: {
     filmFile: {
       url: string;
