@@ -212,16 +212,46 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
             </div>
 
             {/* Compact Film Details */}
-            <div className="flex flex-wrap gap-3">
-              <span className="px-3 py-1 bg-[#FCB283]/20 text-[#FCB283] rounded-lg text-sm border border-[#FCB283]/30">
-                {application.format === 'live-action' ? '🎬 Live Action' : '🎨 Animation'}
-              </span>
-              <span className="px-3 py-1 bg-[#FCB283]/20 text-[#FCB283] rounded-lg text-sm border border-[#FCB283]/30">
-                ⏱️ {application.duration} {currentLanguage === 'th' ? 'นาที' : 'min'}
-              </span>
-              <span className="px-3 py-1 bg-[#FCB283]/20 text-[#FCB283] rounded-lg text-sm border border-[#FCB283]/30">
-                🎭 {application.genres.join(', ')}
-              </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Format & Duration */}
+              <div className="glass-card p-4 rounded-xl">
+                <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-3`}>
+                  {currentLanguage === 'th' ? 'รูปแบบและความยาว' : 'Format & Duration'}
+                </h4>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl">
+                      {application.format === 'live-action' ? '🎬' : '🎨'}
+                    </span>
+                    <span className={`${getClass('body')} text-[#FCB283] capitalize`}>
+                      {application.format.replace('-', ' ')}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl">⏱️</span>
+                    <span className={`${getClass('body')} text-white`}>
+                      {application.duration} {currentLanguage === 'th' ? 'นาที' : 'minutes'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Genres */}
+              <div className="glass-card p-4 rounded-xl">
+                <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-3`}>
+                  {currentLanguage === 'th' ? 'แนวภาพยนตร์' : 'Genres'}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {application.genres.map((genre, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 bg-[#FCB283]/20 text-[#FCB283] rounded-lg text-xs border border-[#FCB283]/30"
+                    >
+                      {genre}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Synopsis */}
@@ -234,6 +264,127 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Submitter/Director Contact Information */}
+      <div className="glass-container rounded-2xl p-6 sm:p-8">
+        <h3 className={`text-xl ${getClass('header')} text-white mb-6`}>
+          📞 {currentLanguage === 'th' ? 'ข้อมูลติดต่อผู้ส่งผลงาน' : 'Submitter Contact Information'}
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Personal Information */}
+          <div className="glass-card p-4 rounded-xl">
+            <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-3`}>
+              {currentLanguage === 'th' ? 'ข้อมูลส่วนตัว' : 'Personal Information'}
+            </h4>
+            <div className="space-y-2">
+              <div>
+                <span className={`text-xs ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'ชื่อ:' : 'Name:'}
+                </span>
+                <p className={`${getClass('body')} text-white text-sm`}>
+                  {currentLanguage === 'th' && ((application as any).submitterNameTh || (application as any).directorNameTh)
+                    ? ((application as any).submitterNameTh || (application as any).directorNameTh)
+                    : ((application as any).submitterName || (application as any).directorName)
+                  }
+                </p>
+                {((application as any).submitterNameTh || (application as any).directorNameTh) && currentLanguage === 'en' && (
+                  <p className={`${getClass('body')} text-white/60 text-xs`}>
+                    {(application as any).submitterNameTh || (application as any).directorNameTh}
+                  </p>
+                )}
+              </div>
+              <div>
+                <span className={`text-xs ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'อายุ:' : 'Age:'}
+                </span>
+                <p className={`${getClass('body')} text-white text-sm`}>
+                  {(application as any).submitterAge || (application as any).directorAge} {currentLanguage === 'th' ? 'ปี' : 'years'}
+                </p>
+              </div>
+              <div>
+                <span className={`text-xs ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'บทบาท:' : 'Role:'}
+                </span>
+                <p className={`${getClass('body')} text-white text-sm`}>
+                  {(application as any).submitterRole === 'Other' 
+                    ? ((application as any).submitterCustomRole || (application as any).directorCustomRole)
+                    : ((application as any).submitterRole || (application as any).directorRole)
+                  }
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Information */}
+          <div className="glass-card p-4 rounded-xl">
+            <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-3`}>
+              {currentLanguage === 'th' ? 'ข้อมูลติดต่อ' : 'Contact Details'}
+            </h4>
+            <div className="space-y-2">
+              <div>
+                <span className={`text-xs ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'อีเมล:' : 'Email:'}
+                </span>
+                <p className={`${getClass('body')} text-white text-sm break-all`}>
+                  {(application as any).submitterEmail || (application as any).directorEmail}
+                </p>
+              </div>
+              <div>
+                <span className={`text-xs ${getClass('body')} text-white/60`}>
+                  {currentLanguage === 'th' ? 'โทรศัพท์:' : 'Phone:'}
+                </span>
+                <p className={`${getClass('body')} text-white text-sm`}>
+                  {(application as any).submitterPhone || (application as any).directorPhone}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Educational Information */}
+          {((application as any).schoolName || (application as any).universityName) && (
+            <div className="glass-card p-4 rounded-xl">
+              <h4 className={`text-sm ${getClass('subtitle')} text-white/80 mb-3`}>
+                {currentLanguage === 'th' ? 'ข้อมูลการศึกษา' : 'Educational Information'}
+              </h4>
+              <div className="space-y-2">
+                <div>
+                  <span className={`text-xs ${getClass('body')} text-white/60`}>
+                    {application.competitionCategory === 'youth' 
+                      ? (currentLanguage === 'th' ? 'โรงเรียน:' : 'School:')
+                      : (currentLanguage === 'th' ? 'มหาวิทยาลัย:' : 'University:')
+                    }
+                  </span>
+                  <p className={`${getClass('body')} text-white text-sm`}>
+                    {(application as any).schoolName || (application as any).universityName}
+                  </p>
+                </div>
+                {(application as any).faculty && (
+                  <div>
+                    <span className={`text-xs ${getClass('body')} text-white/60`}>
+                      {currentLanguage === 'th' ? 'คณะ/สาขา:' : 'Faculty:'}
+                    </span>
+                    <p className={`${getClass('body')} text-white text-sm`}>
+                      {(application as any).faculty}
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <span className={`text-xs ${getClass('body')} text-white/60`}>
+                    {application.competitionCategory === 'youth' 
+                      ? (currentLanguage === 'th' ? 'รหัสนักเรียน:' : 'Student ID:')
+                      : (currentLanguage === 'th' ? 'รหัสนักศึกษา:' : 'Student ID:')
+                    }
+                  </span>
+                  <p className={`${getClass('body')} text-white text-sm font-mono`}>
+                    {(application as any).studentId || (application as any).universityId}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -350,6 +501,18 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
               {currentLanguage === 'th' ? 'ไม่มีสมาชิกทีมงานเพิ่มเติม' : 'No additional crew members'}
             </p>
           </div>
+
+          {/* Connection to Chiang Mai */}
+          {(application as any).chiangmaiConnection && (
+            <div className="glass-card p-6 rounded-xl">
+              <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
+                {currentLanguage === 'th' ? 'ความเกี่ยวข้องกับเชียงใหม่' : 'Connection to Chiang Mai'}
+              </h4>
+              <p className={`${getClass('body')} text-white/90 leading-relaxed whitespace-pre-wrap`}>
+                {(application as any).chiangmaiConnection}
+              </p>
+            </div>
+          )}
         )}
       </div>
 
