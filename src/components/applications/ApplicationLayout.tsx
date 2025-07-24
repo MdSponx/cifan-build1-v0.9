@@ -185,9 +185,24 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
           {/* Film Info - Right Side (2/3) */}
           <div className="lg:col-span-2 space-y-6">
             
-            {/* Competition Logo and Title - Top Right */}
-            <div className="flex justify-end mb-4">
-              <div className="text-right">
+            {/* Film Title and Competition Logo - Same Row */}
+            <div className="flex justify-between items-start gap-6">
+              {/* Film Title - Left Side */}
+              <div className="flex-1">
+                <h1 className={`text-3xl sm:text-4xl md:text-5xl ${getClass('header')} mb-2 text-white leading-tight`}>
+                  {currentLanguage === 'th' && application.filmTitleTh 
+                    ? application.filmTitleTh 
+                    : application.filmTitle}
+                </h1>
+                {((currentLanguage === 'th' && application.filmTitleTh) || (currentLanguage === 'en' && application.filmTitleTh)) && (
+                  <h2 className={`text-xl sm:text-2xl ${getClass('subtitle')} text-[#FCB283] opacity-80`}>
+                    {currentLanguage === 'th' ? application.filmTitle : application.filmTitleTh}
+                  </h2>
+                )}
+              </div>
+              
+              {/* Competition Logo - Right Side */}
+              <div className="text-right flex-shrink-0">
                 <img
                   src={getCategoryLogo(application.competitionCategory)}
                   alt={`${application.competitionCategory} competition logo`}
@@ -197,20 +212,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                   {getCategoryTitle(application.competitionCategory)}
                 </p>
               </div>
-            </div>
-            
-            {/* Film Title */}
-            <div>
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl ${getClass('header')} mb-2 text-white leading-tight`}>
-                {currentLanguage === 'th' && application.filmTitleTh 
-                  ? application.filmTitleTh 
-                  : application.filmTitle}
-              </h1>
-              {((currentLanguage === 'th' && application.filmTitleTh) || (currentLanguage === 'en' && application.filmTitleTh)) && (
-                <h2 className={`text-xl sm:text-2xl ${getClass('subtitle')} text-[#FCB283] opacity-80`}>
-                  {currentLanguage === 'th' ? application.filmTitle : application.filmTitleTh}
-                </h2>
-              )}
             </div>
 
             {/* Compact Film Details */}
@@ -452,14 +453,14 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
         )}
       </div>
 
-      {/* Section 2: Video Only */}
+      {/* Section 3: Video Only */}
       <VideoSection 
         application={application}
         isEditMode={isEditMode}
         canEdit={canEdit}
       />
 
-      {/* Bottom Action Buttons */}
+      {/* Section 4: Action Buttons */}
       <div className="flex justify-between items-center">
         
         {/* Delete Button - Bottom Left */}
