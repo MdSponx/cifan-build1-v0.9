@@ -98,7 +98,7 @@ function App() {
       case 'application-edit':
         return (
           <ProtectedRoute requireEmailVerification={true} requireProfileComplete={true}>
-            <ApplicationEditPage />
+            <ApplicationEditPage applicationId="legacy" />
           </ProtectedRoute>
         );
       case 'coming-soon':

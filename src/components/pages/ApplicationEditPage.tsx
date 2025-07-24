@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save, Send } from 'lucide-react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../auth/AuthContext';
 
-interface ApplicationEditPageProps {}
+interface ApplicationEditPageProps {
+  applicationId: string;
+}
 
-const ApplicationEditPage: React.FC<ApplicationEditPageProps> = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+const ApplicationEditPage: React.FC<ApplicationEditPageProps> = ({ applicationId }) => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [application, setApplication] = useState<any>(null);
 
   useEffect(() => {
     const fetchApplication = async () => {
-      if (!id || !user) return;
+      if (!applicationId || !user) return;
 
       try {
-        const docRef = doc(db, 'submissions', id);
+        const docRef = doc(db, 'submissions', applicationId);
         const docSnap = await getDoc(docRef);
         
         if (docSnap.exists()) {
@@ -33,10 +32,10 @@ const ApplicationEditPage: React.FC<ApplicationEditPageProps> = () => {
     };
 
     fetchApplication();
-  }, [id, user]);
+  }, [applicationId, user]);
 
   const handleBack = () => {
-    navigate(`#application-detail/${id}`);
+    window.location.hash = `application-detail/${applicationId}`;
     window.scrollTo(0, 0);
   };
 
@@ -57,7 +56,7 @@ const ApplicationEditPage: React.FC<ApplicationEditPageProps> = () => {
         <div className="text-center">
           <p className="text-gray-600">Application not found</p>
           <button
-            onClick={() => navigate('#my-applications')}
+            onClick={() => { window.location.hash = 'my-applications'; }}
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Back to Applications
