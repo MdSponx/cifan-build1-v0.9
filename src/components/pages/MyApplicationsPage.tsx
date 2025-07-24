@@ -63,17 +63,22 @@ const MyApplicationsPage = () => {
       }
 
       try {
+        // First try simple query without orderBy to avoid index issues
+        console.log('Fetching applications for user:', user.uid);
+        
         const q = query(
           collection(db, 'submissions'),
-          where('userId', '==', user.uid),
-          orderBy('lastModified', 'desc')
+          where('userId', '==', user.uid)
         );
 
         const querySnapshot = await getDocs(q);
+        console.log('Query returned', querySnapshot.size, 'documents');
+        
         const userApplications: ApplicationData[] = [];
 
         querySnapshot.forEach((doc) => {
           const data = doc.data();
+          console.log('Processing document:', doc.id, data);
           
           // Construct application with safe defaults for files
           const application: ApplicationData = {
@@ -106,84 +111,33 @@ const MyApplicationsPage = () => {
             lastModified: data.lastModified
           };
           
-          // Validate required fields before adding
-          if (application.filmTitle && application.competitionCategory && application.files.posterFile.url) {
+          // More lenient validation - only require basic fields
+          if (application.filmTitle && application.competitionCategory) {
+            console.log('Adding application:', application.id, application.filmTitle);
             userApplications.push(application);
           } else {
-            console.warn('Skipping document with missing required fields:', doc.id, {
+            console.warn('Skipping document with missing basic fields:', doc.id, {
               hasTitle: !!application.filmTitle,
               hasCategory: !!application.competitionCategory,
-              hasPosterUrl: !!application.files.posterFile.url
+              data: data
             });
           }
         });
 
+        // Sort by lastModified in memory (newest first)
+        userApplications.sort((a, b) => {
+          const aTime = a.lastModified?.toDate?.() || new Date(a.lastModified || 0);
+          const bTime = b.lastModified?.toDate?.() || new Date(b.lastModified || 0);
+          return bTime.getTime() - aTime.getTime();
+        });
+
+        console.log('Final applications array:', userApplications.length, 'applications');
         setApplications(userApplications);
       } catch (error) {
-        console.warn('Primary query failed (likely missing index), trying fallback query:', error);
+        console.error('Error fetching applications:', error);
         
-        // If orderBy fails (e.g., missing index), try without it
-        try {
-          const simpleQuery = query(
-            collection(db, 'submissions'),
-            where('userId', '==', user.uid)
-          );
-
-          const querySnapshot = await getDocs(simpleQuery);
-          const userApplications: ApplicationData[] = [];
-
-          querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            
-            // Construct application with safe defaults for files
-            const application: ApplicationData = {
-              id: doc.id,
-              userId: data.userId || '',
-              applicationId: data.applicationId || doc.id,
-              competitionCategory: data.competitionCategory || data.category,
-              status: data.status || 'draft',
-              filmTitle: data.filmTitle || '',
-              filmTitleTh: data.filmTitleTh,
-              genres: data.genres || [],
-              format: data.format || '',
-              duration: data.duration || 0,
-              synopsis: data.synopsis || '',
-              files: {
-                filmFile: data.files?.filmFile || {
-                  url: '',
-                  name: '',
-                  size: 0
-                },
-                posterFile: data.files?.posterFile || {
-                  url: '',
-                  name: '',
-                  size: 0
-                },
-                proofFile: data.files?.proofFile
-              },
-              submittedAt: data.submittedAt,
-              createdAt: data.createdAt,
-              lastModified: data.lastModified
-            };
-            
-            if (application.filmTitle && application.competitionCategory && application.files.posterFile.url) {
-              userApplications.push(application);
-            }
-          });
-
-          // Sort by lastModified in memory
-          userApplications.sort((a, b) => {
-            const aTime = a.lastModified?.toDate?.() || new Date(a.lastModified || 0);
-            const bTime = b.lastModified?.toDate?.() || new Date(b.lastModified || 0);
-            return bTime.getTime() - aTime.getTime();
-          });
-
-          setApplications(userApplications);
-        } catch (fallbackError) {
-          console.error('Fallback query also failed:', fallbackError);
-          // Set empty array so UI shows "no applications" instead of loading forever
-          setApplications([]);
-        }
+        // Set empty array so UI shows "no applications" instead of loading forever
+        setApplications([]);
       } finally {
         setLoading(false);
       }
