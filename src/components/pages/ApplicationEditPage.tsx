@@ -433,7 +433,18 @@ const ApplicationEditPage: React.FC<ApplicationEditPageProps> = ({ applicationId
         chiangmaiConnection: application.chiangmaiConnection || null,
         
         // Crew Information
-        crewMembers: application.crewMembers,
+        crewMembers: application.crewMembers.map(member => ({
+          id: member.id,
+          fullName: member.fullName,
+          fullNameTh: member.fullNameTh || null,
+          role: member.role,
+          customRole: member.customRole || null,
+          age: member.age,
+          phone: member.phone || null,
+          email: member.email || null,
+          schoolName: member.schoolName || null,
+          studentId: member.studentId || null
+        })),
         
         // Update timestamp
         lastModified: serverTimestamp()
@@ -441,29 +452,29 @@ const ApplicationEditPage: React.FC<ApplicationEditPageProps> = ({ applicationId
 
       // Add category-specific fields
       if (application.competitionCategory === 'world') {
-        updateData.directorName = application.directorName;
+        updateData.directorName = application.directorName || null;
         updateData.directorNameTh = application.directorNameTh || null;
-        updateData.directorAge = application.directorAge;
-        updateData.directorPhone = application.directorPhone;
-        updateData.directorEmail = application.directorEmail;
-        updateData.directorRole = application.directorRole;
+        updateData.directorAge = application.directorAge || null;
+        updateData.directorPhone = application.directorPhone || null;
+        updateData.directorEmail = application.directorEmail || null;
+        updateData.directorRole = application.directorRole || null;
         updateData.directorCustomRole = application.directorCustomRole || null;
       } else {
-        updateData.submitterName = application.submitterName;
+        updateData.submitterName = application.submitterName || null;
         updateData.submitterNameTh = application.submitterNameTh || null;
-        updateData.submitterAge = application.submitterAge;
-        updateData.submitterPhone = application.submitterPhone;
-        updateData.submitterEmail = application.submitterEmail;
-        updateData.submitterRole = application.submitterRole;
+        updateData.submitterAge = application.submitterAge || null;
+        updateData.submitterPhone = application.submitterPhone || null;
+        updateData.submitterEmail = application.submitterEmail || null;
+        updateData.submitterRole = application.submitterRole || null;
         updateData.submitterCustomRole = application.submitterCustomRole || null;
         
         if (application.competitionCategory === 'youth') {
-          updateData.schoolName = application.schoolName;
-          updateData.studentId = application.studentId;
+          updateData.schoolName = application.schoolName || null;
+          updateData.studentId = application.studentId || null;
         } else if (application.competitionCategory === 'future') {
-          updateData.universityName = application.universityName;
-          updateData.faculty = application.faculty;
-          updateData.universityId = application.universityId;
+          updateData.universityName = application.universityName || null;
+          updateData.faculty = application.faculty || null;
+          updateData.universityId = application.universityId || null;
         }
       }
 
