@@ -282,7 +282,7 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
             </p>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Section 4: Action Buttons */}
       <div className="flex justify-between items-center">
