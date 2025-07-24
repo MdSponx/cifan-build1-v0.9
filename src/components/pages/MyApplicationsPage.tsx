@@ -88,7 +88,7 @@ const MyApplicationsPage = () => {
 
         setApplications(userApplications);
       } catch (error) {
-        console.error('Error fetching applications:', error);
+        console.warn('Primary query failed (likely missing index), trying fallback query:', error);
         
         // If orderBy fails (e.g., missing index), try without it
         try {
@@ -121,6 +121,8 @@ const MyApplicationsPage = () => {
           setApplications(userApplications);
         } catch (fallbackError) {
           console.error('Fallback query also failed:', fallbackError);
+          // Set empty array so UI shows "no applications" instead of loading forever
+          setApplications([]);
         }
       } finally {
         setLoading(false);
