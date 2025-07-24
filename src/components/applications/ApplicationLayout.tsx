@@ -496,23 +496,25 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
             </div>
           </div>
         ) : (
-          <div className="glass-card p-6 rounded-xl text-center">
-            <p className={`${getClass('body')} text-white/60`}>
-              {currentLanguage === 'th' ? 'ไม่มีสมาชิกทีมงานเพิ่มเติม' : 'No additional crew members'}
-            </p>
-          </div>
-
-          {(application as any).chiangmaiConnection && (
-            <div className="glass-card p-6 rounded-xl">
-              {/* Connection to Chiang Mai */}
-              <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
-                {currentLanguage === 'th' ? 'ความเกี่ยวข้องกับเชียงใหม่' : 'Connection to Chiang Mai'}
-              </h4>
-              <p className={`${getClass('body')} text-white/90 leading-relaxed whitespace-pre-wrap`}>
-                {(application as any).chiangmaiConnection}
+          <>
+            <div className="glass-card p-6 rounded-xl text-center">
+              <p className={`${getClass('body')} text-white/60`}>
+                {currentLanguage === 'th' ? 'ไม่มีสมาชิกทีมงานเพิ่มเติม' : 'No additional crew members'}
               </p>
             </div>
-          )}
+
+            {(application as any).chiangmaiConnection && (
+              <div className="glass-card p-6 rounded-xl">
+                {/* Connection to Chiang Mai */}
+                <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
+                  {currentLanguage === 'th' ? 'ความเกี่ยวข้องกับเชียงใหม่' : 'Connection to Chiang Mai'}
+                </h4>
+                <p className={`${getClass('body')} text-white/90 leading-relaxed whitespace-pre-wrap`}>
+                  {(application as any).chiangmaiConnection}
+                </p>
+              </div>
+            )}
+          </>
         )}
       </div>
 
