@@ -393,8 +393,8 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
             <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
               {currentLanguage === 'th' ? 'สมาชิกทีมงาน' : 'Crew Members'}
             </h4>
-            <div className="overflow-x-auto -mx-6 sm:-mx-8">
-              <table className="w-full glass-card border border-white/10 min-w-[600px]">
+            <div className="overflow-x-auto">
+              <table className="w-full glass-card rounded-xl border border-white/10 min-w-[600px]">
                 <thead>
                   <tr className="bg-gradient-to-r from-[#AA4626] to-[#FCB283]">
                     <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
