@@ -75,14 +75,46 @@ const MyApplicationsPage = () => {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           
+          // Construct application with safe defaults for files
+          const application: ApplicationData = {
+            id: doc.id,
+            userId: data.userId || '',
+            applicationId: data.applicationId || doc.id,
+            competitionCategory: data.competitionCategory || data.category,
+            status: data.status || 'draft',
+            filmTitle: data.filmTitle || '',
+            filmTitleTh: data.filmTitleTh,
+            genres: data.genres || [],
+            format: data.format || '',
+            duration: data.duration || 0,
+            synopsis: data.synopsis || '',
+            files: {
+              filmFile: data.files?.filmFile || {
+                url: '',
+                name: '',
+                size: 0
+              },
+              posterFile: data.files?.posterFile || {
+                url: '',
+                name: '',
+                size: 0
+              },
+              proofFile: data.files?.proofFile
+            },
+            submittedAt: data.submittedAt,
+            createdAt: data.createdAt,
+            lastModified: data.lastModified
+          };
+          
           // Validate required fields before adding
-          if (data.filmTitle && data.competitionCategory && data.files) {
-            userApplications.push({
-              id: doc.id,
-              ...data
-            } as ApplicationData);
+          if (application.filmTitle && application.competitionCategory && application.files.posterFile.url) {
+            userApplications.push(application);
           } else {
-            console.warn('Skipping document with missing required fields:', doc.id);
+            console.warn('Skipping document with missing required fields:', doc.id, {
+              hasTitle: !!application.filmTitle,
+              hasCategory: !!application.competitionCategory,
+              hasPosterUrl: !!application.files.posterFile.url
+            });
           }
         });
 
@@ -103,11 +135,39 @@ const MyApplicationsPage = () => {
           querySnapshot.forEach((doc) => {
             const data = doc.data();
             
-            if (data.filmTitle && data.competitionCategory && data.files) {
-              userApplications.push({
-                id: doc.id,
-                ...data
-              } as ApplicationData);
+            // Construct application with safe defaults for files
+            const application: ApplicationData = {
+              id: doc.id,
+              userId: data.userId || '',
+              applicationId: data.applicationId || doc.id,
+              competitionCategory: data.competitionCategory || data.category,
+              status: data.status || 'draft',
+              filmTitle: data.filmTitle || '',
+              filmTitleTh: data.filmTitleTh,
+              genres: data.genres || [],
+              format: data.format || '',
+              duration: data.duration || 0,
+              synopsis: data.synopsis || '',
+              files: {
+                filmFile: data.files?.filmFile || {
+                  url: '',
+                  name: '',
+                  size: 0
+                },
+                posterFile: data.files?.posterFile || {
+                  url: '',
+                  name: '',
+                  size: 0
+                },
+                proofFile: data.files?.proofFile
+              },
+              submittedAt: data.submittedAt,
+              createdAt: data.createdAt,
+              lastModified: data.lastModified
+            };
+            
+            if (application.filmTitle && application.competitionCategory && application.files.posterFile.url) {
+              userApplications.push(application);
             }
           });
 
@@ -253,11 +313,37 @@ const MyApplicationsPage = () => {
               >
                 {/* Poster Image */}
                 <div className="relative aspect-[4/5] bg-white/5">
-                  <img
-                    src={application.files.posterFile.url}
-                    alt={`${application.filmTitle} Poster`}
-                    className="w-full h-full object-cover"
-                  />
+                  {application.files.posterFile.url ? (
+                    <img
+                      src={application.files.posterFile.url}
+                      alt={`${application.filmTitle} Poster`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `
+                            <div class="w-full h-full flex items-center justify-center bg-white/10">
+                              <div class="text-center text-white/60">
+                                <div class="text-4xl mb-2">🎬</div>
+                                <div class="text-xs">No Poster</div>
+                              </div>
+                            </div>
+                          `;
+                        }
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-white/10">
+                      <div className="text-center text-white/60">
+                        <div className="text-4xl mb-2">🎬</div>
+                        <div className="text-xs">
+                          {currentLanguage === 'th' ? 'ไม่มีโปสเตอร์' : 'No Poster'}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   
                   {/* Status Badge Overlay */}
                   <div className="absolute top-2 right-2">
