@@ -265,10 +265,7 @@ const ApplicationDetailPage: React.FC<ApplicationDetailPageProps> = ({ applicati
                 variant="secondary"
                 size="medium"
                 icon="✏️"
-                onClick={() => {
-                  // TODO: Implement edit mode toggle
-                  console.log('Edit application clicked');
-                }}
+                onClick={() => window.location.hash = `#application-edit/${application.id}`}
               >
                 {currentLanguage === 'th' ? 'แก้ไข' : 'Edit'}
               </AnimatedButton>

@@ -27,6 +27,7 @@ import ProfileSetupPage from './components/pages/ProfileSetupPage';
 import ProfileEditPage from './components/pages/ProfileEditPage';
 import MyApplicationsPage from './components/pages/MyApplicationsPage';
 import ApplicationDetailPage from './components/pages/ApplicationDetailPage';
+import ApplicationEditPage from './components/pages/ApplicationEditPage';
 import ComingSoonPage from './components/pages/ComingSoonPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
@@ -94,6 +95,12 @@ function App() {
             <MyApplicationsPage />
           </ProtectedRoute>
         );
+      case 'application-edit':
+        return (
+          <ProtectedRoute requireEmailVerification={true} requireProfileComplete={true}>
+            <ApplicationEditPage />
+          </ProtectedRoute>
+        );
       case 'coming-soon':
         return <ComingSoonPage />;
       default:
@@ -103,6 +110,15 @@ function App() {
           return (
             <ProtectedRoute requireEmailVerification={true} requireProfileComplete={true}>
               <ApplicationDetailPage applicationId={applicationId} />
+            </ProtectedRoute>
+          );
+        }
+        // Handle application edit page with dynamic ID
+        if (currentPage.startsWith('application-edit/')) {
+          const applicationId = currentPage.replace('application-edit/', '');
+          return (
+            <ProtectedRoute requireEmailVerification={true} requireProfileComplete={true}>
+              <ApplicationEditPage applicationId={applicationId} />
             </ProtectedRoute>
           );
         }
