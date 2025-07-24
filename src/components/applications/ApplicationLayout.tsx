@@ -443,6 +443,7 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                 </tbody>
               </table>
             </div>
+          </div>
         ) : (
           <div className="glass-card p-6 rounded-xl text-center">
             <p className={`${getClass('body')} text-white/60`}>
