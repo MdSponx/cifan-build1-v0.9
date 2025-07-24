@@ -502,9 +502,9 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
             </p>
           </div>
 
-          {/* Connection to Chiang Mai */}
           {(application as any).chiangmaiConnection && (
             <div className="glass-card p-6 rounded-xl">
+              {/* Connection to Chiang Mai */}
               <h4 className={`text-lg ${getClass('subtitle')} text-white mb-4`}>
                 {currentLanguage === 'th' ? 'ความเกี่ยวข้องกับเชียงใหม่' : 'Connection to Chiang Mai'}
               </h4>
