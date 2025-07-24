@@ -96,18 +96,22 @@ const MyApplicationsPage = () => {
             files: {
               filmFile: data.files?.filmFile || {
                 url: data.files.filmFile.downloadURL || '',
+                name: data.files.filmFile.fileName || '',
+                size: data.files.filmFile.fileSize || 0
+              },
+              posterFile: data.files?.posterFile || {
                 url: data.files.posterFile.downloadURL || '',
                 name: data.files.posterFile.fileName || '',
                 size: data.files.posterFile.fileSize || 0
-              posterFile: data.files?.posterFile || {
-                url: '',
-                name: '',
-                size: 0
               },
-              proofFile: data.files?.proofFile
+              proofFile: data.files?.proofFile ? {
                 url: data.files.proofFile.downloadURL || '',
                 name: data.files.proofFile.fileName || '',
                 size: data.files.proofFile.fileSize || 0
+              } : undefined
+            },
+            submittedAt: data.submittedAt,
+            createdAt: data.createdAt,
             lastModified: data.lastModified
           };
           
