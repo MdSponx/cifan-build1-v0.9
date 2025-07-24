@@ -384,7 +384,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                         ID: {(application as any).studentId || (application as any).universityId}
                       </p>
                     </div>
-                  )}
                 </div>
               </div>
             </div>
