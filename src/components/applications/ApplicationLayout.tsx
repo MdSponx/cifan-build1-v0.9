@@ -167,20 +167,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
   return (
     <div className="space-y-8">
       
-      {/* Page Header with Competition Logo */}
-      <div className="text-center mb-8">
-        <div className="flex justify-center mb-4">
-          <img
-            src={getCategoryLogo(application.competitionCategory)}
-            alt={`${application.competitionCategory} competition logo`}
-            className="h-16 w-auto object-contain"
-          />
-        </div>
-        <h3 className={`text-lg ${getClass('subtitle')} text-[#FCB283]`}>
-          {getCategoryTitle(application.competitionCategory)}
-        </h3>
-      </div>
-
       {/* Section 1: Film Info Container */}
       <div className="glass-container rounded-2xl p-6 sm:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -199,6 +185,20 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
           {/* Film Info - Right Side (2/3) */}
           <div className="lg:col-span-2 space-y-6">
             
+            {/* Competition Logo and Title - Top Right */}
+            <div className="flex justify-end mb-4">
+              <div className="text-right">
+                <img
+                  src={getCategoryLogo(application.competitionCategory)}
+                  alt={`${application.competitionCategory} competition logo`}
+                  className="h-12 w-auto object-contain ml-auto mb-2"
+                />
+                <p className={`text-sm ${getClass('subtitle')} text-[#FCB283]`}>
+                  {getCategoryTitle(application.competitionCategory)}
+                </p>
+              </div>
+            </div>
+            
             {/* Film Title */}
             <div>
               <h1 className={`text-3xl sm:text-4xl md:text-5xl ${getClass('header')} mb-2 text-white leading-tight`}>
@@ -211,10 +211,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                   {currentLanguage === 'th' ? application.filmTitle : application.filmTitleTh}
                 </h2>
               )}
-              {/* Competition Category under title */}
-              <p className={`text-base ${getClass('subtitle')} text-[#FCB283]/80 mt-2`}>
-                {getCategoryTitle(application.competitionCategory)}
-              </p>
             </div>
 
             {/* Compact Film Details */}
@@ -462,15 +458,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
         isEditMode={isEditMode}
         canEdit={canEdit}
       />
-
-      {/* Edit Mode: Form-style Layout */}
-      {isEditMode && (
-        <DetailsSection 
-          application={application}
-          isEditMode={isEditMode}
-          onSave={handleSave}
-        />
-      )}
 
       {/* Bottom Action Buttons */}
       <div className="flex justify-between items-center">
