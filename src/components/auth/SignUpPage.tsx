@@ -229,7 +229,7 @@ const SignUpPage = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
-                className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.firstName ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-cifan-peach focus:outline-none`}
+                className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.firstName ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-[#FCB283] focus:outline-none ${getClass('body')}`}
                 required
               />
               <ErrorMessage error={formErrors.firstName} />
@@ -244,7 +244,7 @@ const SignUpPage = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleInputChange}
-                className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.lastName ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-cifan-peach focus:outline-none`}
+                className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.lastName ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-[#FCB283] focus:outline-none ${getClass('body')}`}
                 required
               />
               <ErrorMessage error={formErrors.lastName} />
@@ -261,7 +261,7 @@ const SignUpPage = () => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.email ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-cifan-peach focus:outline-none`}
+              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.email ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-[#FCB283] focus:outline-none ${getClass('body')}`}
               required
             />
             <ErrorMessage error={formErrors.email} />
@@ -277,7 +277,7 @@ const SignUpPage = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.password ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-cifan-peach focus:outline-none`}
+              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.password ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-[#FCB283] focus:outline-none ${getClass('body')}`}
               required
             />
             <small className={`text-white/60 text-xs mt-1 block ${getClass('menu')}`}>
@@ -296,7 +296,7 @@ const SignUpPage = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.confirmPassword ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-cifan-peach focus:outline-none`}
+              className={`w-full p-3 rounded-lg bg-white/10 border ${formErrors.confirmPassword ? 'border-red-400' : 'border-white/20'} text-white placeholder-white/50 focus:border-[#FCB283] focus:outline-none ${getClass('body')}`}
               required
             />
             <ErrorMessage error={formErrors.confirmPassword} />
@@ -310,7 +310,7 @@ const SignUpPage = () => {
                 name="agreeToTerms"
                 checked={formData.agreeToTerms}
                 onChange={handleInputChange}
-                className="mt-1 w-4 h-4 text-cifan-peach bg-white/10 border-white/20 rounded focus:ring-cifan-peach focus:ring-2"
+                className="mt-1 w-4 h-4 text-[#FCB283] bg-white/10 border-white/20 rounded focus:ring-[#FCB283] focus:ring-2"
                 required
               />
               <span className={`text-white/90 ${getClass('menu')} text-sm leading-relaxed`}>
@@ -324,7 +324,7 @@ const SignUpPage = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full px-6 py-4 bg-gradient-to-r from-cifan-orange to-cifan-peach text-white rounded-lg hover:from-cifan-peach hover:to-cifan-orange transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${getClass('menu')} flex items-center justify-center gap-2`}
+            className={`w-full px-6 py-4 bg-gradient-to-r from-[#AA4626] to-[#FCB283] text-white rounded-lg hover:from-[#FCB283] hover:to-[#AA4626] transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${getClass('menu')} flex items-center justify-center gap-2`}
           >
             <span>👤</span>
             {isSubmitting ? currentContent.signingUp : currentContent.signUpButton}
@@ -337,7 +337,7 @@ const SignUpPage = () => {
               <button
                 type="button"
                 onClick={() => window.location.hash = '#auth/signin'}
-                className="text-cifan-peach hover:text-white transition-colors underline"
+                className="text-[#FCB283] hover:text-white transition-colors underline"
               >
                 {currentContent.signInLink}
               </button>

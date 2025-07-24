@@ -168,7 +168,7 @@ const VerifyEmailPage = () => {
               setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }, 100);
-            }}
+            className={`w-full px-6 py-3 bg-gradient-to-r from-[#AA4626] to-[#FCB283] text-white rounded-lg hover:from-[#FCB283] hover:to-[#AA4626] transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${getClass('menu')} flex items-center justify-center gap-2`}
           >
             {currentContent.continueToApp}
           </AnimatedButton>
@@ -264,7 +264,7 @@ const VerifyEmailPage = () => {
           <div className="text-center pt-4 border-t border-white/20 space-y-2">
             <button
               onClick={() => window.location.hash = '#auth/signin'}
-              className={`block w-full text-cifan-peach hover:text-white transition-colors text-sm ${getClass('menu')}`}
+              className={`block w-full text-[#FCB283] hover:text-white transition-colors text-sm ${getClass('menu')}`}
             >
               ← {currentContent.backToSignIn}
             </button>
