@@ -160,7 +160,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           type="text"
           value={formData.fullNameEN}
           onChange={(e) => handleInputChange('fullNameEN', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cifan-peach focus:border-transparent"
+          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FCB283] focus:border-transparent ${getClass('body')}`}
           placeholder={t('profile.fullNameENPlaceholder')}
           disabled={isSubmitting}
         />
@@ -177,7 +177,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           type="text"
           value={formData.fullNameTH || ''}
           onChange={(e) => handleInputChange('fullNameTH', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cifan-peach focus:border-transparent"
+          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FCB283] focus:border-transparent ${getClass('body')}`}
           placeholder={t('profile.fullNameTHPlaceholder')}
           disabled={isSubmitting}
         />
@@ -194,7 +194,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           type="date"
           value={formData.birthDate}
           onChange={(e) => handleInputChange('birthDate', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cifan-peach focus:border-transparent"
+          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FCB283] focus:border-transparent ${getClass('body')}`}
           disabled={isSubmitting}
           max={new Date().toISOString().split('T')[0]} // Prevent future dates
         />
@@ -216,7 +216,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           type="tel"
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cifan-peach focus:border-transparent"
+          className={`w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FCB283] focus:border-transparent ${getClass('body')}`}
           placeholder={t('profile.phoneNumberPlaceholder')}
           disabled={isSubmitting}
         />
@@ -227,7 +227,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-cifan-orange to-cifan-peach hover:from-cifan-peach hover:to-cifan-orange disabled:from-gray-500 disabled:to-gray-600 text-white font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed ${getClass('menu')}`}
+        className={`w-full flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-[#AA4626] to-[#FCB283] hover:from-[#FCB283] hover:to-[#AA4626] disabled:from-gray-500 disabled:to-gray-600 text-white font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed ${getClass('menu')}`}
       >
         {isSubmitting ? (
           <>

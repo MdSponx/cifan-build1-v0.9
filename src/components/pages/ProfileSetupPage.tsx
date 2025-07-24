@@ -57,15 +57,15 @@ const ProfileSetupPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cifan-dark pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-[#110D16] pt-24 pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className={`text-3xl ${getClass('header')} text-white mb-2`}>
-            Profile
+            {t('profile.setupTitle')}
           </h1>
           <p className={`text-white/80 text-lg ${getClass('subtitle')}`}>
-            Complete your profile information
+            {t('profile.setupSubtitle')}
           </p>
         </div>
 
@@ -91,15 +91,15 @@ const ProfileSetupPage: React.FC = () => {
             </h3>
             <ul className={`text-white/80 text-sm space-y-2 text-left max-w-md mx-auto ${getClass('body')}`}>
               <li className="flex items-start space-x-2">
-                <span className="text-cifan-peach mt-1">•</span>
+                <span className="text-[#FCB283] mt-1">•</span>
                 <span>{t('profile.reason1')}</span>
               </li>
               <li className="flex items-start space-x-2">
-                <span className="text-cifan-peach mt-1">•</span>
+                <span className="text-[#FCB283] mt-1">•</span>
                 <span>{t('profile.reason2')}</span>
               </li>
               <li className="flex items-start space-x-2">
-                <span className="text-cifan-peach mt-1">•</span>
+                <span className="text-[#FCB283] mt-1">•</span>
                 <span>{t('profile.reason3')}</span>
               </li>
             </ul>

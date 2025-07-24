@@ -73,7 +73,7 @@ const ProfileEditPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cifan-dark pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-[#110D16] pt-24 pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center mb-8">
@@ -86,10 +86,10 @@ const ProfileEditPage: React.FC = () => {
           </button>
           <div className="flex-1 text-center">
             <h1 className={`text-3xl ${getClass('header')} text-white mb-2`}>
-              Profile
+              {t('profile.editTitle')}
             </h1>
             <p className={`text-white/80 ${getClass('subtitle')}`}>
-              Edit your profile information
+              {t('profile.editSubtitle')}
             </p>
           </div>
         </div>
