@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTypography } from '../../utils/typography';
 import AnimatedButton from '../ui/AnimatedButton';
+import GenreSelector from '../forms/GenreSelector';
 
 interface ApplicationData {
   genres: string[];
@@ -66,13 +67,6 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
           <h3 className={`text-xl ${getClass('header')} text-white`}>
             {currentLanguage === 'th' ? 'รายละเอียดภาพยนตร์' : 'Film Details'}
           </h3>
-          
-          {application.status === 'draft' && !isEditMode && (
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-current mr-2"></span>
-              {currentLanguage === 'th' ? 'สามารถแก้ไขได้' : 'Editable'}
-            </span>
-          )}
         </div>
 
         {isEditMode ? (
@@ -118,33 +112,12 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
             </div>
 
             {/* Genre Selection */}
-            <div>
-              <label className={`block text-white/90 ${getClass('body')} mb-3`}>
-                {currentLanguage === 'th' ? 'แนวภาพยนตร์' : 'Genres'}
-                <span className="text-red-400 ml-1">*</span>
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                {availableGenres.map((genre) => (
-                  <button
-                    key={genre}
-                    type="button"
-                    onClick={() => handleGenreToggle(genre)}
-                    className={`px-3 py-2 rounded-lg text-sm transition-all duration-300 ${
-                      editedGenres.includes(genre)
-                        ? 'bg-[#FCB283] text-white'
-                        : 'bg-white/10 text-white/80 hover:bg-white/20'
-                    }`}
-                  >
-                    {genre}
-                  </button>
-                ))}
-              </div>
-              <p className="text-xs text-white/60 mt-2">
-                {currentLanguage === 'th' 
-                  ? `เลือกแล้ว ${editedGenres.length} แนว` 
-                  : `${editedGenres.length} genres selected`}
-              </p>
-            </div>
+            <GenreSelector
+              value={editedGenres}
+              onChange={setEditedGenres}
+              label={currentLanguage === 'th' ? 'แนวภาพยนตร์' : 'Genres'}
+              required
+            />
 
             {/* Synopsis */}
             <div>

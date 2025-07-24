@@ -266,25 +266,6 @@ const ActionSection: React.FC<ActionSectionProps> = ({
         </div>
 
         {/* Warning Messages */}
-        {application.status === 'draft' && !isEditMode && (
-          <div className="glass-card p-4 rounded-xl border-l-4 border-yellow-400">
-            <div className="flex items-start space-x-3">
-              <span className="text-yellow-400 text-xl">⚠️</span>
-              <div>
-                <h4 className={`${getClass('subtitle')} text-yellow-400 mb-1`}>
-                  {currentLanguage === 'th' ? 'ใบสมัครยังไม่ได้ส่ง' : 'Application Not Submitted'}
-                </h4>
-                <p className={`text-sm ${getClass('body')} text-white/80`}>
-                  {currentLanguage === 'th' 
-                    ? 'ใบสมัครนี้ยังเป็นร่าง กรุณาตรวจสอบข้อมูลและส่งใบสมัครก่อนวันปิดรับสมัคร'
-                    : 'This application is still a draft. Please review and submit before the deadline.'
-                  }
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
         {application.status === 'submitted' && (
           <div className="glass-card p-4 rounded-xl border-l-4 border-green-400">
             <div className="flex items-start space-x-3">
