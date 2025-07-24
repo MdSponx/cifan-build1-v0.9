@@ -211,7 +211,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                   {currentLanguage === 'th' ? application.filmTitle : application.filmTitleTh}
                 </h2>
               )}
-                )}
               {/* Competition Category under title */}
               <p className={`text-base ${getClass('subtitle')} text-[#FCB283]/80 mt-2`}>
                 {getCategoryTitle(application.competitionCategory)}
@@ -384,6 +383,7 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                         ID: {(application as any).studentId || (application as any).universityId}
                       </p>
                     </div>
+                  )}
                 </div>
               </div>
             </div>
