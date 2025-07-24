@@ -443,57 +443,6 @@ const ApplicationLayout: React.FC<ApplicationLayoutProps> = ({ application }) =>
                 </tbody>
               </table>
             </div>
-          <div className="overflow-x-auto">
-            <table className="w-full glass-card border border-white/10 rounded-xl min-w-[600px]">
-              <thead>
-                <tr className="bg-gradient-to-r from-[#AA4626] to-[#FCB283]">
-                  <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
-                    {currentLanguage === 'th' ? 'ชื่อ' : 'Name'}
-                  </th>
-                  <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
-                    {currentLanguage === 'th' ? 'บทบาท' : 'Role'}
-                  </th>
-                  <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
-                    {currentLanguage === 'th' ? 'อายุ' : 'Age'}
-                  </th>
-                  <th className={`px-4 py-3 text-left ${getClass('subtitle')} text-white text-sm`}>
-                    {currentLanguage === 'th' ? 'ติดต่อ' : 'Contact'}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {(application as any).crewMembers.map((member: any, index: number) => (
-                  <tr key={index} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
-                      <div>
-                        <div>{member.fullName}</div>
-                        {member.fullNameTh && (
-                          <div className="text-xs text-white/60">{member.fullNameTh}</div>
-                        )}
-                      </div>
-                    </td>
-                    <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
-                      {member.role === 'Other' ? member.customRole : member.role}
-                    </td>
-                    <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
-                      {member.age} {currentLanguage === 'th' ? 'ปี' : 'years'}
-                    </td>
-                    <td className={`px-4 py-3 ${getClass('body')} text-white/90 text-sm`}>
-                      <div className="space-y-1">
-                        {member.phone && (
-                          <div className="text-xs">📱 {member.phone}</div>
-                        )}
-                        {member.email && (
-                          <div className="text-xs">📧 {member.email}</div>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          </div>
         ) : (
           <div className="glass-card p-6 rounded-xl text-center">
             <p className={`${getClass('body')} text-white/60`}>
