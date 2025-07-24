@@ -265,7 +265,12 @@ const ApplicationDetailPage: React.FC<ApplicationDetailPageProps> = ({ applicati
                 variant="secondary"
                 size="medium"
                 icon="✏️"
-                onClick={() => window.location.hash = `#application-edit/${application.id}`}
+                onClick={() => {
+                  window.location.hash = `#application-edit/${application.id}`;
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
               >
                 {currentLanguage === 'th' ? 'แก้ไข' : 'Edit'}
               </AnimatedButton>
