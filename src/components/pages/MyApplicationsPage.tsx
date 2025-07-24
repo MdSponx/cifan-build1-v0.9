@@ -95,19 +95,19 @@ const MyApplicationsPage = () => {
             synopsis: data.synopsis || '',
             files: {
               filmFile: data.files?.filmFile || {
-                url: '',
-                name: '',
-                size: 0
-              },
+                url: data.files.filmFile.downloadURL || '',
+                url: data.files.posterFile.downloadURL || '',
+                name: data.files.posterFile.fileName || '',
+                size: data.files.posterFile.fileSize || 0
               posterFile: data.files?.posterFile || {
                 url: '',
                 name: '',
                 size: 0
               },
               proofFile: data.files?.proofFile
-            },
-            submittedAt: data.submittedAt,
-            createdAt: data.createdAt,
+                url: data.files.proofFile.downloadURL || '',
+                name: data.files.proofFile.fileName || '',
+                size: data.files.proofFile.fileSize || 0
             lastModified: data.lastModified
           };
           
